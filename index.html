@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ștefan Macovei — Pianist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #F9F7F3;
+    --bg2:      #F2EFE9;
+    --text:     #1A1916;
+    --muted:    #78756E;
+    --accent:   #B8A48A;
+    --border:   #E2DDD5;
+    --serif:    'Playfair Display', Georgia, serif;
+    --body:     'EB Garamond', Georgia, serif;
+    --ph:       #CC1100;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .placeholder {
+    color: var(--ph);
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 0.88rem;
+    border: 1.5px dashed var(--ph);
+    padding: 0.35rem 0.75rem;
+    display: inline-block;
+    letter-spacing: 0.02em;
+  }
+  .placeholder-block {
+    color: var(--ph);
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 0.88rem;
+    border: 1.5px dashed var(--ph);
+    padding: 0.75rem 1.25rem;
+    display: block;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--body);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .hero-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name em { font-style: italic; }
+  .hero-tagline {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 44ch;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: gap 0.2s, border-color 0.2s;
+  }
+  .hero-cta:hover { gap: 1rem; border-color: var(--text); }
+  .hero-scroll {
+    position: absolute; right: 4rem; bottom: 6rem;
+    writing-mode: vertical-rl;
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block; width: 1px; height: 60px;
+    background: var(--accent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.4); opacity: 0.4; }
+  }
+
+  section { padding: 6rem 4rem; border-bottom: 0.5px solid var(--border); }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 0 0 40px; height: 0.5px;
+    background: var(--accent);
+  }
+
+  /* ABOUT */
+  #about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .about-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+  .about-heading em { font-style: italic; color: var(--muted); }
+  .about-body { color: var(--muted); line-height: 1.85; font-size: 1.05rem; }
+  .about-body p + p { margin-top: 1.2rem; }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 3/4;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-img-frame::before {
+    content: '';
+    position: absolute; inset: 1rem;
+    border: 0.5px solid var(--border);
+    z-index: 1; pointer-events: none;
+  }
+  .about-photo-credit { margin-top: 0.75rem; }
+
+  /* COMPETITIONS */
+  #competitions { background: var(--bg2); }
+  .comp-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-weight: 400;
+    margin-bottom: 3rem;
+  }
+  .comp-list { display: flex; flex-direction: column; max-width: 680px; }
+  .comp-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1.1rem 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .comp-item:first-child { border-top: 0.5px solid var(--border); }
+  .comp-prize {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .comp-name { font-size: 1rem; color: var(--text); line-height: 1.45; }
+
+  /* MEDIA */
+  #media {}
+  .media-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-weight: 400; margin-bottom: 3.5rem;
+  }
+  .media-subheading {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 3rem 0 1.75rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .media-subheading::after { content: ''; flex: 0 0 40px; height: 0.5px; background: var(--accent); }
+  .media-subheading:first-of-type { margin-top: 0; }
+  .album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2.5rem;
+  }
+  .album-card { display: grid; grid-template-columns: 120px 1fr; gap: 1.25rem; align-items: start; }
+  .album-cover {
+    width: 120px; height: 120px;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .album-cover-text {
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.75rem; color: var(--accent);
+    text-align: center; line-height: 1.6; padding: 0.5rem;
+  }
+  .album-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; line-height: 1.2; margin-bottom: 0.25rem; }
+  .album-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; line-height: 1.5; }
+  .album-year { font-size: 0.78rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .album-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .album-link {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    border: 0.5px solid var(--border); padding: 0.3rem 0.7rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .album-link:hover { color: var(--text); border-color: var(--accent); }
+  .duo-blurb {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.7;
+    max-width: 58ch;
+  }
+
+  footer {
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 0.5px solid var(--border);
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-label   { animation: fadeUp 0.7s ease both; }
+  .hero-name    { animation: fadeUp 0.7s 0.15s ease both; }
+  .hero-tagline { animation: fadeUp 0.7s 0.28s ease both; }
+  .hero-cta     { animation: fadeUp 0.7s 0.40s ease both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    #hero { padding: 0 1.5rem 5rem; }
+    .hero-scroll { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; text-align: center; }
+    .album-card { grid-template-columns: 1fr; }
+    .album-cover { width: 100%; height: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Ștefan Macovei</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#competitions">Prizes</a></li>
+    <li><a href="#media">Media</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-label">Pianist · Copenhagen</p>
+  <h1 class="hero-name">Ștefan<br><em>Macovei</em></h1>
+  <p class="hero-tagline">Romanian pianist born in Cyprus, based in Copenhagen. A musical voice shaped by the Lied tradition and the French piano repertoire.</p>
+  <a href="#about" class="hero-cta">Discover more →</a>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <p class="section-label">Biography</p>
+    <h2 class="about-heading">From Nicosia<br><em>to Copenhagen</em></h2>
+    <div class="about-body">
+      <p>Ștefan Macovei was born in 1999 in Nicosia, Cyprus. He completed his Bachelor's degree at the "Gheorghe Dima" National Academy of Music in Cluj-Napoca, Romania, and continued his studies at the Accademia del Ridotto in Italy under Prof. Vincenzo Balzani — a collaboration that began in 2016.</p>
+      <p>Since 2023, he has been pursuing his Master's degree at the Royal Danish Academy of Music in Copenhagen, in the class of Prof. Marianna Shirinyan. He has performed across Europe, in Romania, Cyprus, Italy, Denmark, Germany, France, Spain, Sweden, Switzerland, Lithuania, Malta, and Russia.</p>
+      <p style="margin-top:1.2rem;"><span class="placeholder-block">⚠ PLACEHOLDER — Stefan, feel free to add any further biographical details here.</span></p>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-img-frame">
+      <div style="padding:1.5rem; text-align:center;">
+        <span class="placeholder-block">⚠ PLACEHOLDER — Add a portrait photograph here.</span>
+      </div>
+    </div>
+    <p class="about-photo-credit" style="margin-top:0.75rem;">
+      <span class="placeholder" style="font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;">⚠ PLACEHOLDER — Photo credit</span>
+    </p>
+  </div>
+</section>
+
+<!-- COMPETITIONS -->
+<section id="competitions">
+  <p class="section-label">Recognition</p>
+  <h2 class="comp-heading">Prizes &amp; Awards</h2>
+  <div class="comp-list">
+
+    <div class="comp-item">
+      <div class="comp-name">"Irina Șatchi" Competition</div>
+      <div class="comp-prize">Grand Prize</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">"PianoTalents" Competition, Milan</div>
+      <div class="comp-prize">1st Prize</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">"Tadini" Competition</div>
+      <div class="comp-prize">Grand Prize</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">"Valsesia Musica" Competition — Special Prize "Giovanni Turcotti" for the best performance of a Beethoven Sonata</div>
+      <div class="comp-prize">Special Prize</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">"C. Franck" Competition</div>
+      <div class="comp-prize">1st Prize</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">"R. Langgaard" Competition, Copenhagen</div>
+      <div class="comp-prize">1st Prize</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">Yamaha Foundation Scholarship, Scandinavia</div>
+      <div class="comp-prize">Scholarship</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- MEDIA -->
+<section id="media">
+  <p class="section-label">Listen &amp; Watch</p>
+  <h2 class="media-heading">Recordings</h2>
+
+  <p class="media-subheading">Solo</p>
+  <div class="album-grid">
+    <div class="album-card">
+      <div class="album-cover">
+        <div class="album-cover-text">Images<br>Oubliées</div>
+      </div>
+      <div>
+        <div class="album-title">Images Oubliées</div>
+        <div class="album-subtitle">Debussy: Images Oubliées · D'un cahier d'esquisses · 12 Études L. 136</div>
+        <div class="album-year">KNS Classical · 2024</div>
+        <div class="album-links">
+          <a class="album-link" href="https://open.spotify.com/album/7ktdnOxtroH3d4HRKbyMRV" target="_blank">Spotify</a>
+          <a class="album-link" href="https://music.apple.com/es/album/images-oubli%C3%A9es/1774892319" target="_blank">Apple Music</a>
+          <a class="album-link" href="https://music.amazon.es/albums/B0DKBPR4DQ" target="_blank">Amazon</a>
+          <a class="album-link" href="https://youtube.com/playlist?list=PLIdfsxQgRRZR2bC3YkH35nrUyk_J1xZDJ" target="_blank">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="media-subheading">Duo Spiro</p>
+  <div class="album-grid">
+    <div class="album-card">
+      <div class="album-cover">
+        <div class="album-cover-text">Echoes<br>of Her</div>
+      </div>
+      <div>
+        <div class="album-title">Echoes of Her</div>
+        <div class="album-subtitle">Grieg · Debussy · Schumann · Nordraak · Nielsen</div>
+        <div class="album-year">Duo Spiro · Self-released</div>
+        <div class="album-links">
+          <a class="album-link" href="https://www.youtube.com/@DuoSpiro" target="_blank">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="duo-blurb">
+    Duo Spiro is a Danish–Romanian Lied duo based in Copenhagen, formed by mezzo-soprano Marie Borup and pianist Ștefan Macovei. Their repertoire draws on the French, Scandinavian, and German song traditions.
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="comp-heading">Get in Touch</h2>
+  <div style="margin-top: 0.5rem;">
+    <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Email</p>
+    <span class="placeholder-block">⚠ PLACEHOLDER — Add contact email address here, e.g. stefan@example.com</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2026 Ștefan Macovei. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
