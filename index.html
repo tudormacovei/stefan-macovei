@@ -19,7 +19,7 @@
     --serif:    'Playfair Display', Georgia, serif;
     --body:     'EB Garamond', Georgia, serif;
     --ph:       #CC1100;
-    --hero-bg:  #0a0a0a;
+    --hero-bg:  #000000;
   }
 
   html { scroll-behavior: smooth; }
@@ -83,6 +83,28 @@
   }
   .nav-links a:hover { color: var(--text); }
 
+  /* ── HAMBURGER ── */
+  .nav-toggle { display: none; }
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px; height: 16px;
+    cursor: pointer;
+    z-index: 101;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 100%; height: 1px;
+    background: var(--text);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; }
+  .nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+
   /* ── HERO ── */
   #hero {
     min-height: 100vh;
@@ -116,18 +138,16 @@
     pointer-events: none;
   }
 
-  /* Side vignette — fades left/right edges into hero-bg */
+  /* Edge vignettes — four directional fades covering each side */
   #hero::before {
     content: '';
     position: absolute; inset: 0;
     z-index: 1;
-    background: radial-gradient(
-      ellipse 70% 100% at 50% 50%,
-      transparent 30%,
-      rgba(10,10,10,0.55) 65%,
-      rgba(10,10,10,0.92) 85%,
-      var(--hero-bg) 100%
-    );
+    background:
+      linear-gradient(to right,  var(--hero-bg) 0%, transparent 52%),
+      linear-gradient(to left,   var(--hero-bg) 0%, transparent 52%),
+      linear-gradient(to bottom, var(--hero-bg) 0%, transparent 30%),
+      linear-gradient(to top,    var(--hero-bg) 0%, transparent 10%);
     pointer-events: none;
   }
 
@@ -358,6 +378,24 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; width: 100%;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(249,247,243,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0.5rem 0;
+    }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 0.9rem 1.5rem;
+      font-size: 0.85rem;
+    }
     #hero { padding: 0 1.5rem 5rem; }
     .hero-scroll { display: none; }
     section { padding: 4rem 1.5rem; }
@@ -374,6 +412,12 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">Ștefan Macovei</a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+  <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#competitions">Prizes</a></li>
@@ -392,9 +436,9 @@
   />
 
   <div class="hero-content">
-    <p class="hero-label">Pianist · Copenhagen</p>
+    <p class="hero-label">Pianist · Répétiteur · Vocal Coach</p>
     <h1 class="hero-name">Ștefan<br><em>Macovei</em></h1>
-    <p class="hero-tagline">Romanian pianist born in Cyprus, based in Copenhagen. A musical voice shaped by the Lied tradition and the French piano repertoire.</p>
+    <p class="hero-tagline">Romanian pianist born in Cyprus, based in Copenhagen.</p>
     <a href="#about" class="hero-cta">Discover more →</a>
   </div>
 
