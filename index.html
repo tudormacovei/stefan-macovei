@@ -229,25 +229,19 @@
     50% { transform: scaleY(0.4); opacity: 0.4; }
   }
 
-  /* ── SECTIONS ── */
-  section { padding: 6rem 4rem; border-bottom: 0.5px solid var(--border); }
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 4rem;
+  }
 
-  .section-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 3.5rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .section-label::after {
-    content: '';
-    flex: 0 0 40px; height: 0.5px;
-    background: var(--accent);
-  }
+  /* ── SECTIONS ── */
+  section { padding: 4rem 0; border-bottom: 0.5px solid var(--border); }
 
   /* ── ABOUT ── */
-  #about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  #about .container { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
   .about-heading {
     font-family: var(--serif);
     font-size: clamp(2rem, 3.5vw, 3rem);
@@ -281,7 +275,7 @@
     font-weight: 400;
     margin-bottom: 3rem;
   }
-  .comp-list { display: flex; flex-direction: column; max-width: 680px; }
+  .comp-list { display: flex; flex-direction: column; }
   .comp-item {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -374,11 +368,24 @@
     max-width: 58ch;
   }
 
+  /* ── CONTACT ── */
+  .contact-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
   /* ── FOOTER ── */
   footer {
+    border-top: 0.5px solid var(--border);
+  }
+  .footer-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
     padding: 2rem 4rem;
     display: flex; justify-content: space-between; align-items: center;
-    border-top: 0.5px solid var(--border);
     flex-wrap: wrap; gap: 1rem;
   }
   .footer-copy { font-size: 0.8rem; color: var(--accent); }
@@ -419,9 +426,10 @@
     .hero-name { font-size: clamp(2.2rem, 10vw, 7.5rem); }
     .hero-tagline { font-size: 0.9rem; margin-bottom: 1.2rem; }
     .hero-scroll { display: none; }
-    section { padding: 4rem 1.5rem; }
-    #about { grid-template-columns: 1fr; gap: 3rem; }
-    footer { flex-direction: column; text-align: center; }
+    section { padding: 3rem 0; }
+    .container { padding: 0 1.5rem; }
+    #about .container { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-container { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
     .album-card { grid-template-columns: 1fr; }
     .album-grid { grid-template-columns: 1fr; }
     .hero-portrait { height: clamp(60vh, 30vw + 50vh, 100vh); width: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); }
@@ -469,134 +477,141 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about-left">
-    <p class="section-label">Biography</p>
-    <h2 class="about-heading">From Nicosia<br><em>to Copenhagen</em></h2>
-    <div class="about-body">
-      <p>Ștefan Macovei is a répétiteur and collaborative pianist in the soloist class, currently undertaking an internship with the Young Artist Programme at the Royal Danish Opera in Copenhagen. He has worked on productions including <em>Murder on the Titanic</em> by Matias Vestergaard (DKDM, 2026), as well as <em>Rigoletto</em> by Giuseppe Verdi, <em>Don Pasquale</em> by Gaetano Donizetti, and <em>Idomeneo</em> by Wolfgang Amadeus Mozart at the Royal Danish Opera (2026). His work encompasses coaching singers and close collaboration with conductors in both rehearsal and performance contexts. He has also been invited to participate in conducting courses such as Dirigentløftet as an accompanying pianist for conducting students, and has worked with vocal ensembles including the Copenhagen Chamber Choir.</p>
-      <p>Ștefan Macovei was born in 1999 in Nicosia, Cyprus. He completed his Bachelor's degree at the "Gheorghe Dima" National Academy of Music in Cluj-Napoca, Romania under Prof. Cipriana Gavrișiu, and continued his studies at the Accademia del Ridotto in Italy under Prof. Vincenzo Balzani — a collaboration that began in 2016. During this time, he performed extensively across Northern Italy with the support of Associazione PianoFriends Milano.</p>
-      <p>He has also worked in masterclasses with distinguished pianists such as Elisabeth Leonskaja, Boris Berman, Lilya Zilberstein, Natalia Trull and Andrzej Jasiński.</p>
-      <p>Since 2023, he has been pursuing his Master's degree at the Royal Danish Academy of Music in Copenhagen in the class of Prof. Marianna Shirinyan, and is currently enrolled in the soloist class. He has performed widely across Europe and Asia, including in Romania, Italy, Denmark, Germany, France, Spain, Sweden, Switzerland, Lithuania, Malta, Japan, and Russia.</p>
+  <div class="container">
+    <div class="about-left">
+      <h2 class="about-heading">From Nicosia<br><em>to Copenhagen</em></h2>
+      <div class="about-body">
+        <p>Ștefan Macovei is a répétiteur and collaborative pianist in the soloist class, currently undertaking an internship with the Young Artist Programme at the Royal Danish Opera in Copenhagen. He has worked on productions including <em>Murder on the Titanic</em> by Matias Vestergaard (DKDM, 2026), as well as <em>Rigoletto</em> by Giuseppe Verdi, <em>Don Pasquale</em> by Gaetano Donizetti, and <em>Idomeneo</em> by Wolfgang Amadeus Mozart at the Royal Danish Opera (2026). His work encompasses coaching singers and close collaboration with conductors in both rehearsal and performance contexts. He has also been invited to participate in conducting courses such as Dirigentløftet as an accompanying pianist for conducting students, and has worked with vocal ensembles including the Copenhagen Chamber Choir.</p>
+        <p>Ștefan Macovei was born in 1999 in Nicosia, Cyprus. He completed his Bachelor's degree at the "Gheorghe Dima" National Academy of Music in Cluj-Napoca, Romania under Prof. Cipriana Gavrișiu, and continued his studies at the Accademia del Ridotto in Italy under Prof. Vincenzo Balzani — a collaboration that began in 2016. During this time, he performed extensively across Northern Italy with the support of Associazione PianoFriends Milano.</p>
+        <p>He has also worked in masterclasses with distinguished pianists such as Elisabeth Leonskaja, Boris Berman, Lilya Zilberstein, Natalia Trull and Andrzej Jasiński.</p>
+        <p>Since 2023, he has been pursuing his Master's degree at the Royal Danish Academy of Music in Copenhagen in the class of Prof. Marianna Shirinyan, and is currently enrolled in the soloist class. He has performed widely across Europe and Asia, including in Romania, Italy, Denmark, Germany, France, Spain, Sweden, Switzerland, Lithuania, Malta, Japan, and Russia.</p>
+      </div>
     </div>
-  </div>
-  <div class="about-right">
-    <div class="about-img-frame">
-      <img src="assets/Stefan Macovei 5.webp" alt="Ștefan Macovei" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+    <div class="about-right">
+      <div class="about-img-frame">
+        <img src="assets/Stefan Macovei 5.webp" alt="Ștefan Macovei" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+      </div>
     </div>
   </div>
 </section>
 
 <!-- COMPETITIONS -->
 <section id="competitions">
-  <p class="section-label">Recognition</p>
-  <h2 class="comp-heading">Prizes &amp; Awards</h2>
-  <div class="comp-list">
+  <div class="container">
+    <h2 class="comp-heading">Prizes &amp; Awards</h2>
+    <div class="comp-list">
 
-    <div class="comp-item">
-      <div class="comp-name">"Irina Șatchi" Competition</div>
-      <div class="comp-prize">Grand Prize</div>
-    </div>
-    <div class="comp-item">
-      <div class="comp-name">"PianoTalents" Competition, Milan</div>
-      <div class="comp-prize">1st Prize</div>
-    </div>
-    <div class="comp-item">
-      <div class="comp-name">"Tadini" Competition</div>
-      <div class="comp-prize">Grand Prize</div>
-    </div>
-    <div class="comp-item">
-      <div class="comp-name">"Valsesia Musica" Competition — Special Prize "Giovanni Turcotti" for the best performance of a Beethoven Sonata</div>
-      <div class="comp-prize">Special Prize</div>
-    </div>
-    <div class="comp-item">
-      <div class="comp-name">"C. Franck" Competition</div>
-      <div class="comp-prize">1st Prize</div>
-    </div>
-    <div class="comp-item">
-      <div class="comp-name">"R. Langgaard" Competition, Copenhagen</div>
-      <div class="comp-prize">1st Prize</div>
-    </div>
-    <div class="comp-item">
-      <div class="comp-name">Yamaha Foundation Scholarship, Scandinavia</div>
-      <div class="comp-prize">Scholarship</div>
-    </div>
+      <div class="comp-item">
+        <div class="comp-name">"Irina Șatchi" Competition</div>
+        <div class="comp-prize">Grand Prize</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-name">"PianoTalents" Competition, Milan</div>
+        <div class="comp-prize">1st Prize</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-name">"Tadini" Competition</div>
+        <div class="comp-prize">Grand Prize</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-name">"Valsesia Musica" Competition — Special Prize "Giovanni Turcotti" for the best performance of a Beethoven Sonata</div>
+        <div class="comp-prize">Special Prize</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-name">"C. Franck" Competition</div>
+        <div class="comp-prize">1st Prize</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-name">"R. Langgaard" Competition, Copenhagen</div>
+        <div class="comp-prize">1st Prize</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-name">Yamaha Foundation Scholarship, Scandinavia</div>
+        <div class="comp-prize">Scholarship</div>
+      </div>
 
+    </div>
   </div>
 </section>
 
 <!-- MEDIA -->
 <section id="media">
-  <p class="section-label">Listen &amp; Watch</p>
-  <h2 class="media-heading">Recordings</h2>
+  <div class="container">
+    <h2 class="media-heading">Recordings</h2>
 
-  <p class="media-subheading">Solo</p>
-  <div class="album-grid">
-    <div class="album-card">
-      <div class="album-embed-wrap">
-        <iframe
-          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-          height="450"
-          src="https://embed.music.apple.com/us/album/1774892319?app=music"
-          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="album-meta">
-        <div class="album-title">Images Oubliées</div>
-        <div class="album-year">KNS Classical · 2024</div>
-      </div>
-      <div class="album-subtitle">Debussy: Images Oubliées · D'un cahier d'esquisses · 12 Études L. 136</div>
-      <div class="album-links">
-        <a class="album-link" href="https://classical.music.apple.com/us/album/1774892319" target="_blank">Apple Music Classical</a>
-        <a class="album-link" href="https://open.spotify.com/album/7ktdnOxtroH3d4HRKbyMRV" target="_blank">Spotify</a>
-        <a class="album-link" href="https://youtube.com/playlist?list=PLIdfsxQgRRZR2bC3YkH35nrUyk_J1xZDJ" target="_blank">YouTube</a>
-        <a class="album-link" href="https://www.qobuz.com/be-nl/album/images-oubliees-stefan-macovei/r6yzf70mgs1ob" target="_blank">Qobuz</a>
+    <p class="media-subheading">Solo</p>
+    <div class="album-grid">
+      <div class="album-card">
+        <div class="album-embed-wrap">
+          <iframe
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            height="450"
+            src="https://embed.music.apple.com/us/album/1774892319?app=music"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="album-meta">
+          <div class="album-title">Images Oubliées</div>
+          <div class="album-year">KNS Classical · 2024</div>
+        </div>
+        <div class="album-subtitle">Debussy: Images Oubliées · D'un cahier d'esquisses · 12 Études L. 136</div>
+        <div class="album-links">
+          <a class="album-link" href="https://classical.music.apple.com/us/album/1774892319" target="_blank">Apple Music Classical</a>
+          <a class="album-link" href="https://open.spotify.com/album/7ktdnOxtroH3d4HRKbyMRV" target="_blank">Spotify</a>
+          <a class="album-link" href="https://youtube.com/playlist?list=PLIdfsxQgRRZR2bC3YkH35nrUyk_J1xZDJ" target="_blank">YouTube</a>
+          <a class="album-link" href="https://www.qobuz.com/be-nl/album/images-oubliees-stefan-macovei/r6yzf70mgs1ob" target="_blank">Qobuz</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <p class="media-subheading">Duo Spiro</p>
-  <div class="album-grid">
-    <div class="album-card">
-      <div class="album-embed-wrap">
-        <iframe
-          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-          height="450"
-          src="https://embed.music.apple.com/us/album/1864598319?app=music"
-          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="album-meta">
-        <div class="album-title">Echoes of Her</div>
-        <div class="album-year">Duo Spiro · Self-released</div>
-      </div>
-      <div class="album-subtitle">Grieg · Debussy · Schumann · Nordraak · Nielsen</div>
-      <div class="album-links">
-        <a class="album-link" href="https://classical.music.apple.com/us/album/1864598319" target="_blank">Apple Music Classical</a>
-        <a class="album-link" href="https://www.qobuz.com/us-en/album/echoes-of-her-claude-debussy-edvard-grieg-heinrich-heine-lili-boulanger-amy-beach-pierre-louys-nadia-boulanger-clara-schumann-arne-garborg-poul-schierbeck-maurice-maeterlinck-georges-delaquys-rued-langgaard-thor-lange-emil-rittershaus-george-macdonald-e/qm2k4tel1d3j5" target="_blank">Qobuz</a>
-        <a class="album-link" href="https://www.youtube.com/@DuoSpiro" target="_blank">YouTube</a>
+    <p class="media-subheading">Duo Spiro</p>
+    <div class="album-grid">
+      <div class="album-card">
+        <div class="album-embed-wrap">
+          <iframe
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            height="450"
+            src="https://embed.music.apple.com/us/album/1864598319?app=music"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="album-meta">
+          <div class="album-title">Echoes of Her</div>
+          <div class="album-year">Duo Spiro · Self-released</div>
+        </div>
+        <div class="album-subtitle">Grieg · Debussy · Schumann · Nordraak · Nielsen</div>
+        <div class="album-links">
+          <a class="album-link" href="https://classical.music.apple.com/us/album/1864598319" target="_blank">Apple Music Classical</a>
+          <a class="album-link" href="https://www.qobuz.com/us-en/album/echoes-of-her-claude-debussy-edvard-grieg-heinrich-heine-lili-boulanger-amy-beach-pierre-louys-nadia-boulanger-clara-schumann-arne-garborg-poul-schierbeck-maurice-maeterlinck-georges-delaquys-rued-langgaard-thor-lange-emil-rittershaus-george-macdonald-e/qm2k4tel1d3j5" target="_blank">Qobuz</a>
+          <a class="album-link" href="https://www.youtube.com/@DuoSpiro" target="_blank">YouTube</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="duo-blurb">
-    Duo Spiro is a Danish–Romanian Lied duo based in Copenhagen, formed by mezzo-soprano Marie Borup and pianist Ștefan Macovei. Their repertoire draws on the French, Scandinavian, and German song traditions.
+    <div class="duo-blurb">
+      Duo Spiro is a Danish–Romanian Lied duo based in Copenhagen, formed by mezzo-soprano Marie Borup and pianist Ștefan Macovei. Their repertoire draws on the French, Scandinavian, and German song traditions.
+    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <p class="section-label">Contact</p>
-  <div style="margin-top: 0.5rem;">
-    <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Email</p>
-    <span class="placeholder-block">⚠ PLACEHOLDER — Add contact email address here, e.g. stefan@example.com</span>
+  <div class="container">
+    <h2 class="contact-heading">Contact</h2>
+    <div style="margin-top: 1.5rem;">
+      <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Email</p>
+      <a href="mailto:stefan99.macovei@gmail.com" style="color:var(--text); text-decoration:none; font-size:1.15rem; border-bottom:1px solid var(--accent); padding-bottom:2px; transition: border-color 0.2s;">stefan99.macovei@gmail.com</a>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p class="footer-copy">© 2026 Ștefan Macovei. All rights reserved.</p>
+  <div class="footer-container">
+    <p class="footer-copy">© 2026 Ștefan Macovei. All rights reserved.</p>
+  </div>
 </footer>
 
 </body>
