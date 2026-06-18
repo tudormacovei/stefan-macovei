@@ -6,7 +6,7 @@
 <title>Ștefan Macovei — Pianist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,7 +15,7 @@
     --bg2:      #F2EFE9;
     --text:     #1A1916;
     --muted:    #78756E;
-    --accent:   #B8A48A;
+    --accent:   #8C7350;
     --border:   #E2DDD5;
     --serif:    'Playfair Display', Georgia, serif;
     --body:     'EB Garamond', Georgia, serif;
@@ -29,7 +29,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: var(--body);
-    font-size: 18px;
+    font-size: 19px;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
@@ -68,7 +68,8 @@
   .nav-logo {
     font-family: var(--serif);
     font-size: 1.05rem;
-    letter-spacing: 0.04em;
+    font-weight: 500;
+    letter-spacing: 0.013em;
     color: var(--text);
     text-decoration: none;
   }
@@ -175,6 +176,7 @@
 
   .hero-label {
     font-size: 0.78rem;
+    font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--accent);
@@ -213,7 +215,7 @@
   .hero-scroll {
     position: absolute; right: 4rem; bottom: 6rem;
     writing-mode: vertical-rl;
-    font-size: 0.72rem; letter-spacing: 0.15em;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--accent);
     display: flex; align-items: center; gap: 0.8rem;
     z-index: 3;
@@ -287,6 +289,7 @@
   .comp-item:first-child { border-top: 0.5px solid var(--border); }
   .comp-prize {
     font-size: 0.72rem;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
@@ -305,7 +308,8 @@
   }
   .media-subheading {
     font-size: 0.72rem;
-    letter-spacing: 0.2em;
+    font-weight: 600;
+    letter-spacing: 0.11em;
     text-transform: uppercase;
     color: var(--accent);
     margin: 3rem 0 1.75rem;
@@ -347,7 +351,7 @@
     padding: 0 0.25rem;
   }
   .album-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; line-height: 1.2; }
-  .album-year { font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+  .album-year { font-size: 0.72rem; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
   .album-subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.5; padding: 0 0.25rem; }
 
   .album-links { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0 0.25rem; }
@@ -390,7 +394,7 @@
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 1rem;
   }
-  .footer-copy { font-size: 0.8rem; color: var(--accent); }
+  .footer-copy { font-size: 0.8rem; font-weight: 600; color: var(--accent); }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -676,7 +680,7 @@
   <div class="container">
     <h2 class="contact-heading">Contact</h2>
     <div style="margin-top: 1.5rem;">
-      <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Email</p>
+      <p style="font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Email</p>
       <a href="mailto:stefan99.macovei@gmail.com" style="color:var(--text); text-decoration:none; font-size:1.15rem; border-bottom:1px solid var(--accent); padding-bottom:2px; transition: border-color 0.2s;">stefan99.macovei@gmail.com</a>
     </div>
   </div>
