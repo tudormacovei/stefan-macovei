@@ -11,16 +11,15 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:       #F9F7F3;
-    --bg2:      #F2EFE9;
-    --text:     #1A1916;
-    --muted:    #78756E;
-    --accent:   #8C7350;
-    --border:   #E2DDD5;
-    --serif:    'Playfair Display', Georgia, serif;
-    --body:     'EB Garamond', Georgia, serif;
-    --ph:       #CC1100;
-    --hero-bg:  #000000;
+    --bg:           #F9F7F3;
+    --bg-alt:       #F2EFE9;
+    --text:         #1A1916;
+    --muted:        #78756E;
+    --accent:       #8C7350;
+    --border:       #E2DDD5;
+    --heading-font: 'Playfair Display', Georgia, serif;
+    --text-font:    'EB Garamond', Georgia, serif;
+    --hero-bg:      #000000;
   }
 
   html { scroll-behavior: smooth; }
@@ -28,32 +27,10 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--body);
+    font-family: var(--text-font);
     font-size: 19px;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
-  }
-
-  .placeholder {
-    color: var(--ph);
-    font-family: var(--body);
-    font-style: italic;
-    font-size: 0.88rem;
-    border: 1.5px dashed var(--ph);
-    padding: 0.35rem 0.75rem;
-    display: inline-block;
-    letter-spacing: 0.02em;
-  }
-  .placeholder-block {
-    color: var(--ph);
-    font-family: var(--body);
-    font-style: italic;
-    font-size: 0.88rem;
-    border: 1.5px dashed var(--ph);
-    padding: 0.75rem 1.25rem;
-    display: block;
-    letter-spacing: 0.02em;
-    line-height: 1.6;
   }
 
   /* ── NAV ── */
@@ -66,7 +43,7 @@
     border-bottom: 0.5px solid var(--border);
   }
   .nav-logo {
-    font-family: var(--serif);
+    font-family: var(--heading-font);
     font-size: 1.05rem;
     font-weight: 500;
     letter-spacing: 0.013em;
@@ -75,7 +52,7 @@
   }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
-    font-family: var(--body);
+    font-family: var(--text-font);
     font-size: 0.9rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -85,9 +62,10 @@
   }
   .nav-links a:hover { color: var(--text); }
 
-  /* ── HAMBURGER ── */
-  .nav-toggle { display: none; }
-  .nav-hamburger {
+  /* ── MENU BUTTON (phones and tablets) ── */
+  /* A hidden checkbox keeps the menu open or closed, so the menu works without JavaScript */
+  .nav-menu-open { display: none; }
+  .nav-menu-button {
     display: none;
     flex-direction: column;
     justify-content: space-between;
@@ -95,17 +73,17 @@
     cursor: pointer;
     z-index: 101;
   }
-  .nav-hamburger span {
+  .nav-menu-button span {
     display: block;
     width: 100%; height: 1px;
     background: var(--text);
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
   }
-  .nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-  .nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; }
-  .nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .nav-menu-open:checked ~ .nav-menu-button span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .nav-menu-open:checked ~ .nav-menu-button span:nth-child(2) { opacity: 0; }
+  .nav-menu-open:checked ~ .nav-menu-button span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+  .nav-menu-open:checked ~ .nav-links { display: flex; }
 
   /* ── HERO ── */
   #hero {
@@ -119,7 +97,7 @@
     overflow: hidden;
   }
 
-  /* Portrait image — centered, full height */
+  /* Portrait photo, centered and full height */
   .hero-portrait {
     position: absolute;
     top: 50%; left: 50%;
@@ -131,16 +109,7 @@
     z-index: 0;
   }
 
-  /* Placeholder shown when no image is set */
-  .hero-portrait-placeholder {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  /* Edge vignettes — four directional fades covering each side */
+  /* Fades on all four edges, so the photo blends into the black background */
   #hero::before {
     content: '';
     position: absolute; inset: 0;
@@ -153,7 +122,7 @@
     pointer-events: none;
   }
 
-  /* Bottom fade — dissolves into the first light section */
+  /* Extra dark fade at the bottom, so the hero text stays readable over the photo */
   #hero::after {
     content: '';
     position: absolute; bottom: 0; left: 0; right: 0;
@@ -168,8 +137,8 @@
     pointer-events: none;
   }
 
-  /* Hero text — sits above both vignette layers */
-  .hero-content {
+  /* Hero text sits above both fades */
+  .hero-text {
     position: relative;
     z-index: 3;
   }
@@ -183,7 +152,7 @@
     margin-bottom: 1.2rem;
   }
   .hero-name {
-    font-family: var(--serif);
+    font-family: var(--heading-font);
     font-size: clamp(3.5rem, 8vw, 7.5rem);
     font-weight: 400;
     line-height: 1.0;
@@ -197,39 +166,57 @@
     color: #A09C96;
     max-width: 44ch;
     line-height: 1.65;
-    margin-bottom: 2.5rem;
   }
-  .hero-cta {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #F2EFE9;
-    text-decoration: none;
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 2px;
-    transition: gap 0.2s, border-color 0.2s;
-  }
-  .hero-cta:hover { gap: 1rem; border-color: #F2EFE9; }
 
-  .hero-scroll {
-    position: absolute; right: 4rem; bottom: 6rem;
-    writing-mode: vertical-rl;
-    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--accent);
-    display: flex; align-items: center; gap: 0.8rem;
+  /* Upcoming concerts card */
+  .concert-card {
+    position: absolute;
+    right: 4rem; top: 50%;
+    translate: 0 -50%;
     z-index: 3;
+    scroll-margin-top: 6rem;
+    width: clamp(380px, 22vw, 440px);
+    padding: 1.75rem 2rem 1.25rem;
+    color: #F2EFE9;
+    background: linear-gradient(160deg, rgba(242,239,233,0.07) 0%, rgba(242,239,233,0.02) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 0.5px solid rgba(242,239,233,0.14);
+    border-radius: 2px;
+    box-shadow:
+      0 30px 60px -10px rgba(0,0,0,0.9),
+      inset 0 1px 0 rgba(242,239,233,0.08);
   }
-  .hero-scroll::after {
-    content: '';
-    display: block; width: 1px; height: 60px;
-    background: var(--accent);
-    animation: scrollLine 2s ease-in-out infinite;
+  .concert-card .subheading { margin: 0 0 0.75rem; }
+  .concert-list { list-style: none; }
+  .concert {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.25rem 1.5rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-top: 0.5px solid rgba(242,239,233,0.14);
   }
-  @keyframes scrollLine {
-    0%, 100% { transform: scaleY(1); opacity: 1; }
-    50% { transform: scaleY(0.4); opacity: 0.4; }
+  .concert-when { display: flex; align-items: baseline; gap: 0.85rem; }
+  .concert-date { font-family: var(--heading-font); font-size: 1.05rem; color: #F2EFE9; line-height: 1.2; }
+  .concert-time { color: #F2EFE9; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; border-left: 0.5px solid var(--accent); padding-left: 0.85rem; white-space: nowrap; }
+  .concert-where {
+    grid-column: 1 / -1;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #A09C96;
   }
+  .concert-where span { display: block; }
+  .concert-where span:last-child { color: #D9D5CE; }
+  .concert-ticket {
+    grid-row: 1; grid-column: 2;
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #F2EFE9; text-decoration: none;
+    border-bottom: 0.5px solid var(--accent);
+    transition: border-color 0.2s;
+  }
+  .concert-ticket:hover { border-color: #F2EFE9; }
 
   /* ── CONTAINER ── */
   .container {
@@ -241,93 +228,17 @@
 
   /* ── SECTIONS ── */
   section { padding: 4rem 0; border-bottom: 0.5px solid var(--border); }
-  #concerts { padding: 2.5rem 0 3rem; }
-
-  /* ── ABOUT ── */
-  #about .container { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-  .about-heading {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 2rem;
-  }
-  .about-heading em { font-style: italic; color: var(--muted); }
-  .about-body { color: var(--muted); line-height: 1.85; font-size: 1.05rem; max-width: 65ch; }
-  .about-body p + p { margin-top: 1.2rem; }
-  .about-img-frame {
-    width: 100%; aspect-ratio: 3/4;
-    background: var(--bg2);
-    border: 0.5px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-  }
-  .about-img-frame::before {
-    content: '';
-    position: absolute; inset: 1rem;
-    border: 0.5px solid var(--border);
-    z-index: 1; pointer-events: none;
-  }
-  .about-photo-credit { margin-top: 0.75rem; }
-
-  /* ── COMPETITIONS ── */
-  #competitions { background: var(--bg2); }
-  .comp-heading {
-    font-family: var(--serif);
+  .section-heading {
+    font-family: var(--heading-font);
     font-size: clamp(2rem, 3vw, 2.6rem);
     font-weight: 400;
     margin-bottom: 3rem;
   }
-  #concerts .comp-heading { margin-bottom: 1.5rem; }
-  .comp-list { display: flex; flex-direction: column; }
-  .comp-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
-    align-items: baseline;
-    padding: 1.1rem 0;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .comp-item:first-child { border-top: 0.5px solid var(--border); }
-  .comp-prize {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    white-space: nowrap;
-  }
-  .comp-name { font-size: 1rem; color: var(--text); line-height: 1.45; }
-  .comp-item { transition: background 0.2s; padding: 1.1rem 0.5rem; margin: 0 -0.5rem; }
-  .comp-item:hover { background: rgba(0,0,0,0.03); }
-  .upcoming-item { grid-template-columns: 1fr auto; }
-  .concert-meta { display: flex; align-items: baseline; gap: 0.85rem; margin-bottom: 0.35rem; }
-  .concert-date { display: inline; font-family: var(--serif); font-size: 1.1rem; color: var(--accent); line-height: 1.2; }
-  .concert-time { color: #F2EFE9; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; border-left: 0.5px solid var(--accent); padding-left: 0.85rem; white-space: nowrap; }
-  .concert-ticket { color: inherit; text-decoration: none; border-bottom: 0.5px solid currentColor; transition: color 0.2s, border-color 0.2s; }
-  .concert-ticket:hover { color: var(--text); border-color: var(--text); }
-  .upcoming-band {
-    background: var(--hero-bg);
-    color: #F2EFE9;
-    padding: 1.5rem 0 1.75rem;
-  }
-  .upcoming-band .media-subheading { margin-top: 0; font-size: 0.9rem; letter-spacing: 0.14em; }
-  .upcoming-band .comp-item { border-color: rgba(242,239,233,0.28); }
-  .upcoming-band .comp-item:hover { background: rgba(242,239,233,0.08); }
-  .upcoming-band .comp-name { color: #F2EFE9; }
-  .upcoming-band .concert-date { color: #F2EFE9; }
-  .upcoming-band .concert-ticket { color: #F2EFE9; border-color: var(--accent); }
-  .upcoming-band .concert-ticket:hover { color: #F2EFE9; border-color: #F2EFE9; }
-  .concert-history { padding-top: 3rem; }
+  #media .section-heading { margin-bottom: 3.5rem; }
+  #contact .section-heading { margin-bottom: 1.5rem; }
 
-  /* ── MEDIA ── */
-  #media {}
-  .media-heading {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3vw, 2.6rem);
-    font-weight: 400; margin-bottom: 3.5rem;
-  }
-  .media-subheading {
+  /* Small gold heading with a short line after it */
+  .subheading {
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.11em;
@@ -336,10 +247,116 @@
     margin: 3rem 0 1.75rem;
     display: flex; align-items: center; gap: 1rem;
   }
-  .media-subheading::after { content: ''; flex: 0 0 40px; height: 0.5px; background: var(--accent); }
-  .media-subheading:first-of-type { margin-top: 0; }
+  .subheading::after { content: ''; flex: 0 0 40px; height: 0.5px; background: var(--accent); }
+  .subheading:first-of-type { margin-top: 0; }
 
-  /* Album embed cards */
+  /* ── ABOUT ── */
+  #about .container { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .about-heading {
+    font-family: var(--heading-font);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+  .about-heading em { font-style: italic; color: var(--muted); }
+  .about-bio { color: var(--muted); line-height: 1.85; font-size: 1.05rem; max-width: 65ch; }
+  .about-bio p + p { margin-top: 1.2rem; }
+  .about-text { min-width: 0; }
+
+  /* Bio pages. The browser handles swiping (CSS scroll snapping);
+     the script at the end of the page runs the dots and arrow buttons. */
+  .about-pages {
+    display: flex; gap: 3rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .about-pages::-webkit-scrollbar { display: none; }
+  .about-pages:focus-visible { outline: 1px solid var(--accent); outline-offset: 0.5rem; }
+  .about-page { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+  .about-controls {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    margin-top: 2rem; padding-top: 1.25rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .about-progress { display: flex; align-items: center; gap: 0.75rem; }
+  .about-dots { display: flex; }
+  .about-dot {
+    position: relative;
+    width: 2rem; height: 2.5rem;
+    background: none; border: none; cursor: pointer;
+  }
+  .about-dot::before {
+    content: '';
+    position: absolute; left: 0.25rem; right: 0.25rem; top: 50%;
+    height: 1px;
+    background: rgba(120,117,110,0.35);
+    transition: background 0.2s;
+  }
+  .about-dot:hover::before { background: var(--muted); }
+  .about-dot[aria-current="true"]::before { background: var(--accent); height: 2px; }
+  .about-count {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.11em;
+    color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .about-arrows { display: flex; gap: 0.5rem; }
+  .about-arrow {
+    width: 2.5rem; height: 2.5rem;
+    font-family: var(--text-font); font-size: 1rem; color: var(--text);
+    background: none; cursor: pointer;
+    border: 0.5px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .about-arrow:hover:not(:disabled) { border-color: var(--accent); }
+  .about-arrow:disabled { opacity: 0.35; cursor: default; }
+  @media (prefers-reduced-motion: reduce) { .about-pages { scroll-behavior: auto; } }
+
+  .about-photo-frame {
+    width: 100%; aspect-ratio: 3/4;
+    background: var(--bg-alt);
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-photo-frame::before {
+    content: '';
+    position: absolute; inset: 1rem;
+    border: 0.5px solid var(--border);
+    z-index: 1; pointer-events: none;
+  }
+  .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ── PRIZES & CONCERT LISTS ── */
+  /* Each entry is a row: name on the left, a short detail (prize, year or date) on the right */
+  #prizes { background: var(--bg-alt); }
+  .entry-list { display: flex; flex-direction: column; }
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1.1rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-bottom: 0.5px solid var(--border);
+    transition: background 0.2s;
+  }
+  .entry:first-child { border-top: 0.5px solid var(--border); }
+  .entry-detail {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .entry-name { font-size: 1rem; color: var(--text); line-height: 1.45; }
+  .entry:hover { background: rgba(0,0,0,0.03); }
+
+  /* ── MEDIA ── */
+  /* Album cards with an Apple Music player */
   .album-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -350,7 +367,7 @@
     flex-direction: column;
     gap: 1.1rem;
   }
-  .album-embed-wrap {
+  .album-player {
     position: relative;
     border-radius: 14px;
     overflow: hidden;
@@ -358,22 +375,22 @@
     background: #1c1c1e;
     line-height: 0;
   }
-  .album-embed-wrap iframe {
+  .album-player iframe {
     display: block;
     width: 100%;
     border: none;
     border-radius: 14px;
   }
-  .album-meta {
+  .album-header {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
     padding: 0 0.25rem;
   }
-  .album-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; line-height: 1.2; }
-  .album-year { font-size: 0.72rem; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
-  .album-subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.5; padding: 0 0.25rem; }
+  .album-title { font-family: var(--heading-font); font-size: 1.05rem; font-weight: 500; line-height: 1.2; }
+  .album-release { font-size: 0.72rem; font-weight: 600; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+  .album-works { font-size: 0.85rem; color: var(--muted); line-height: 1.5; padding: 0 0.25rem; }
 
   .album-links { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0 0.25rem; }
   .album-link {
@@ -384,7 +401,7 @@
   }
   .album-link:hover { color: var(--text); border-color: var(--accent); }
 
-  .duo-blurb {
+  .duo-intro {
     margin-top: 2rem;
     padding: 1.25rem 1.5rem;
     border-left: 2px solid var(--accent);
@@ -396,11 +413,18 @@
   }
 
   /* ── CONTACT ── */
-  .contact-heading {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3vw, 2.6rem);
-    font-weight: 400;
-    margin-bottom: 1.5rem;
+  .contact-item + .contact-item { margin-top: 2rem; }
+  .contact-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .contact-link {
+    color: var(--text); text-decoration: none;
+    font-size: 1.15rem;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
   }
 
   /* ── FOOTER ── */
@@ -425,12 +449,33 @@
   .hero-label   { animation: fadeUp 0.7s ease both; }
   .hero-name    { animation: fadeUp 0.7s 0.15s ease both; }
   .hero-tagline { animation: fadeUp 0.7s 0.28s ease both; }
-  .hero-cta     { animation: fadeUp 0.7s 0.40s ease both; }
+  .concert-card { animation: fadeUp 0.7s 0.55s ease both; }
 
-  /* ── RESPONSIVE ── */
+  /* ── SMALLER SCREENS ── */
+  /* Tablets, phones and tall windows have no room for the concerts card next to the portrait.
+     The card moves below the first screen; the photo, fades and hero text keep the
+     first-screen (100vh) layout. */
+  @media (max-width: 1200px), (max-aspect-ratio: 7/5) {
+    .hero-portrait { top: 50vh; height: 100vh; }
+    #hero::before { bottom: auto; height: 100vh; }
+    #hero::after { top: 55vh; bottom: auto; height: 45vh; }
+    .hero-text {
+      min-height: calc(100vh - 6rem);
+      display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
+    }
+    .concert-card {
+      position: relative;
+      top: auto; right: auto;
+      translate: none;
+      width: 100%; max-width: 420px;
+      margin-top: 2.5rem;
+    }
+  }
+
+  /* Phones and tablets in portrait */
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
-    .nav-hamburger { display: flex; }
+    .nav-menu-button { display: flex; }
     .nav-links {
       display: none;
       position: absolute;
@@ -451,19 +496,19 @@
     #hero { padding: 0 1.5rem 3rem; }
     .hero-label { font-size: 0.7rem; letter-spacing: 0.1em; }
     .hero-name { font-size: clamp(2.2rem, 10vw, 7.5rem); }
-    .hero-tagline { font-size: 0.9rem; margin-bottom: 1.2rem; }
-    .hero-scroll { display: none; }
+    .hero-tagline { font-size: 0.9rem; }
+    .concert-card { max-width: none; margin-top: 2rem; padding: 1.25rem 1.25rem 0.5rem; }
     section { padding: 3rem 0; }
     .container { padding: 0 1.5rem; }
+    /* Dated entries (Past Appearances): date above the venue instead of squeezing it into a column */
+    .entry:has(time) { grid-template-columns: 1fr; gap: 0.2rem; }
+    .entry:has(time) .entry-detail { order: -1; }
     #about .container { grid-template-columns: 1fr; gap: 3rem; }
-    .about-right { max-width: 75%; margin: 0 auto; }
+    .about-photo { max-width: 75%; margin: 0 auto; }
     .footer-container { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-    .album-card { grid-template-columns: 1fr; }
     .album-grid { grid-template-columns: 1fr; }
-    .upcoming-band { padding: 1.25rem 0 1.5rem; }
-    .concert-history { padding-top: 2rem; }
-    .upcoming-item { grid-template-columns: 1fr; gap: 0.35rem; }
-    .hero-portrait { height: clamp(60vh, 30vw + 50vh, 100vh); width: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .hero-portrait { height: clamp(60vh, 30vw + 50vh, 100vh); }
+    .hero-text { min-height: calc(100vh - 3rem); }
   }
 </style>
 </head>
@@ -472,8 +517,8 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">Ștefan Macovei</a>
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-  <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle navigation">
+  <input type="checkbox" id="nav-menu-open" class="nav-menu-open" />
+  <label for="nav-menu-open" class="nav-menu-button" aria-label="Menu">
     <span></span>
     <span></span>
     <span></span>
@@ -481,7 +526,7 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#concerts">Concerts</a></li>
-    <li><a href="#competitions">Prizes</a></li>
+    <li><a href="#prizes">Prizes</a></li>
     <li><a href="#media">Media</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -497,31 +542,75 @@
     fetchpriority="high"
   />
 
-  <div class="hero-content">
+  <div class="hero-text">
     <p class="hero-label">Pianist · Répétiteur · Vocal Coach</p>
     <h1 class="hero-name">Ștefan<br><em>Macovei</em></h1>
     <p class="hero-tagline">Romanian pianist born in Cyprus, based in Copenhagen.</p>
-    <a href="#upcoming-concerts" class="hero-cta">Upcoming concerts →</a>
   </div>
 
-  <div class="hero-scroll">Scroll</div>
+  <!-- Upcoming concerts. Once a concert has passed, move it to "Past Appearances" in the Concerts
+       section, with its date, venue and orchestra (see the note there). Delete this card when
+       no upcoming concerts are left. -->
+  <aside class="concert-card" id="upcoming-concerts" aria-label="Upcoming concerts">
+    <p class="subheading">Upcoming concerts</p>
+    <ul class="concert-list">
+      <li class="concert">
+        <div class="concert-when">
+          <time class="concert-date" datetime="2026-10-01">1 October 2026</time>
+          <span class="concert-time">19:00</span>
+        </div>
+        <p class="concert-where"><span>Malmö Live Konserthus — Malmö, Sweden</span><span>Malmö Symphony Orchestra</span></p>
+        <a class="concert-ticket" href="https://malmolive.se/en/program/firebird" target="_blank" rel="noopener">Tickets</a>
+      </li>
+      <li class="concert">
+        <div class="concert-when">
+          <time class="concert-date" datetime="2026-10-03">3 October 2026</time>
+          <span class="concert-time">13:00</span>
+        </div>
+        <p class="concert-where"><span>Malmö Live Konserthus — Malmö, Sweden</span><span>Malmö Symphony Orchestra</span></p>
+        <a class="concert-ticket" href="https://malmolive.se/en/program/the-firebird-thursday" target="_blank" rel="noopener">Tickets</a>
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="container">
-    <div class="about-left">
+    <div class="about-text">
       <h2 class="about-heading">From Nicosia<br><em>to Copenhagen</em></h2>
-      <div class="about-body">
-        <p>Ștefan Macovei is a répétiteur and collaborative pianist in the soloist class, currently undertaking an internship with the Young Artist Programme at the Royal Danish Opera in Copenhagen. He has worked on productions including <em>Murder on the Titanic</em> by Matias Vestergaard (DKDM, 2026), as well as <em>Rigoletto</em> by Giuseppe Verdi, <em>Don Pasquale</em> by Gaetano Donizetti, and <em>Idomeneo</em> by Wolfgang Amadeus Mozart at the Royal Danish Opera (2026). His work encompasses coaching singers and close collaboration with conductors in both rehearsal and performance contexts. He has also been invited to participate in conducting courses such as Dirigentløftet as an accompanying pianist for conducting students, and has worked with vocal ensembles including the Copenhagen Chamber Choir.</p>
-        <p>Ștefan Macovei was born in 1999 in Nicosia, Cyprus. He completed his Bachelor's degree at the "Gheorghe Dima" National Academy of Music in Cluj-Napoca, Romania under Prof. Cipriana Gavrișiu, and continued his studies at the Accademia del Ridotto in Italy under Prof. Vincenzo Balzani — a collaboration that began in 2016. During this time, he performed extensively across Northern Italy with the support of Associazione PianoFriends Milano.</p>
-        <p>He has also worked in masterclasses with distinguished pianists such as Elisabeth Leonskaja, Boris Berman, Lilya Zilberstein, Natalia Trull and Andrzej Jasiński.</p>
-        <p>Since 2023, he has been pursuing his Master's degree at the Royal Danish Academy of Music in Copenhagen in the class of Prof. Marianna Shirinyan, and is currently enrolled in the soloist class. He has performed widely across Europe and Asia, including in Romania, Italy, Denmark, Germany, France, Spain, Sweden, Switzerland, Lithuania, Malta, Japan, and Russia.</p>
+      <div class="about-bio" aria-roledescription="carousel" aria-label="Biography">
+        <div class="about-pages" tabindex="0">
+          <div class="about-page" role="group" aria-roledescription="page" aria-label="1 of 3">
+            <p>Ștefan Macovei is a répétiteur and collaborative pianist in the soloist class, currently undertaking an internship with the Young Artist Programme at the Royal Danish Opera in Copenhagen. He has worked on productions including <em>Murder on the Titanic</em> by Matias Vestergaard (DKDM, 2026), as well as <em>Rigoletto</em> by Giuseppe Verdi, <em>Don Pasquale</em> by Gaetano Donizetti, and <em>Idomeneo</em> by Wolfgang Amadeus Mozart at the Royal Danish Opera (2026). His work encompasses coaching singers and close collaboration with conductors in both rehearsal and performance contexts. He has also been invited to participate in conducting courses such as Dirigentløftet as an accompanying pianist for conducting students, and has worked with vocal ensembles including the Copenhagen Chamber Choir.</p>
+          </div>
+          <div class="about-page" role="group" aria-roledescription="page" aria-label="2 of 3">
+            <p>Ștefan Macovei was born in 1999 in Nicosia, Cyprus. He completed his Bachelor's degree at the "Gheorghe Dima" National Academy of Music in Cluj-Napoca, Romania under Prof. Cipriana Gavrișiu, and continued his studies at the Accademia del Ridotto in Italy under Prof. Vincenzo Balzani — a collaboration that began in 2016. During this time, he performed extensively across Northern Italy with the support of Associazione PianoFriends Milano.</p>
+            <p>He has also worked in masterclasses with distinguished pianists such as Elisabeth Leonskaja, Boris Berman, Lilya Zilberstein, Natalia Trull and Andrzej Jasiński.</p>
+          </div>
+          <div class="about-page" role="group" aria-roledescription="page" aria-label="3 of 3">
+            <p>Since 2023, he has been pursuing his Master's degree at the Royal Danish Academy of Music in Copenhagen in the class of Prof. Marianna Shirinyan, and is currently enrolled in the soloist class. He has performed widely across Europe and Asia, including in Romania, Italy, Denmark, Germany, France, Spain, Sweden, Switzerland, Lithuania, Malta, Japan, and Russia.</p>
+          </div>
+        </div>
+        <div class="about-controls">
+          <div class="about-progress">
+            <div class="about-dots">
+              <button type="button" class="about-dot" aria-label="Page 1" aria-current="true"></button>
+              <button type="button" class="about-dot" aria-label="Page 2"></button>
+              <button type="button" class="about-dot" aria-label="Page 3"></button>
+            </div>
+            <span class="about-count" aria-hidden="true">1 / 3</span>
+          </div>
+          <div class="about-arrows">
+            <button type="button" class="about-arrow about-prev" aria-label="Previous page" disabled>&larr;</button>
+            <button type="button" class="about-arrow about-next" aria-label="Next page">&rarr;</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="about-right">
-      <div class="about-img-frame">
-        <img src="assets/Stefan Macovei 5.webp" alt="Ștefan Macovei" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+    <div class="about-photo">
+      <div class="about-photo-frame">
+        <img src="assets/Stefan Macovei 5.webp" alt="Ștefan Macovei" loading="lazy" />
       </div>
     </div>
   </div>
@@ -530,147 +619,126 @@
 <!-- CONCERTS -->
 <section id="concerts">
   <div class="container">
-    <h2 class="comp-heading">Concerts</h2>
-  </div>
-
-  <div class="upcoming-band" id="upcoming-concerts">
-    <div class="container">
-      <p class="media-subheading">Upcoming concerts</p>
-      <div class="comp-list">
-      <div class="comp-item upcoming-item">
-        <div class="comp-name">
-          <div class="concert-meta">
-            <time class="concert-date" datetime="2026-08-19">19 August 2026</time>
-            <span class="concert-time">19:30</span>
-          </div>
-          DR Koncerthuset — Copenhagen, Denmark · The Royal Danish Orchestra
-        </div>
-        <div class="comp-prize"><a class="concert-ticket" href="https://www.drkoncerthuset.dk/kalender/2026/det-kongelige-kapel/det-kongelige-kapel-jacquot-szeps-znaider-og-brahms/" target="_blank" rel="noopener">Tickets</a></div>
+    <h2 class="section-heading">Concerts</h2>
+    <p class="subheading">As Soloist</p>
+    <div class="entry-list">
+      <div class="entry">
+        <div class="entry-name">Mihail Jora Philharmonic — Bacău, Romania</div>
+        <div class="entry-detail"></div>
       </div>
-      <div class="comp-item upcoming-item">
-        <div class="comp-name">
-          <div class="concert-meta">
-            <time class="concert-date" datetime="2026-08-21">21 August 2026</time>
-            <span class="concert-time">20:00</span>
-          </div>
-          Concertgebouw — Amsterdam, Netherlands · The Royal Danish Orchestra
-        </div>
-        <div class="comp-prize"><a class="concert-ticket" href="https://www.concertgebouw.nl/en/concerts/41486307-nikolaj-szeps-znaider-plays-brahms-violin-concerto" target="_blank" rel="noopener">Tickets</a></div>
+      <div class="entry">
+        <div class="entry-name">Ion Dumitrescu Philharmonic — Râmnicu Vâlcea, Romania</div>
+        <div class="entry-detail"></div>
       </div>
-      <div class="comp-item upcoming-item">
-        <div class="comp-name">
-          <div class="concert-meta">
-            <time class="concert-date" datetime="2026-08-22">22 August 2026</time>
-            <span class="concert-time">19:30</span>
-          </div>
-          Festival Zelt — Gstaad, Switzerland · The Royal Danish Orchestra
-        </div>
-        <div class="comp-prize"><a class="concert-ticket" href="https://shop.menuhin.ch/de/event/173791/" target="_blank" rel="noopener">Tickets</a></div>
+      <div class="entry">
+        <div class="entry-name">Südwestdeutsche Philharmonie — Konstanz, Germany</div>
+        <div class="entry-detail"></div>
       </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container concert-history">
-    <p class="media-subheading">As Soloist</p>
-    <div class="comp-list">
-      <div class="comp-item">
-        <div class="comp-name">Mihail Jora Philharmonic — Bacău, Romania</div>
-        <div class="comp-prize"></div>
-      </div>
-      <div class="comp-item">
-        <div class="comp-name">Ion Dumitrescu Philharmonic — Râmnicu Vâlcea, Romania</div>
-        <div class="comp-prize"></div>
-      </div>
-      <div class="comp-item">
-        <div class="comp-name">Südwestdeutsche Philharmonie — Konstanz, Germany</div>
-        <div class="comp-prize"></div>
-      </div>
-      <div class="comp-item">
-        <div class="comp-name">Antonio Vivaldi Orchestra — Milan, Italy</div>
-        <div class="comp-prize"></div>
+      <div class="entry">
+        <div class="entry-name">Antonio Vivaldi Orchestra — Milan, Italy</div>
+        <div class="entry-detail"></div>
       </div>
     </div>
 
-    <p class="media-subheading">Recitals &amp; Festivals</p>
-    <div class="comp-list">
-      <div class="comp-item">
-        <div class="comp-name">Castello Sforzesco · Piano City Milano — Milan, Italy</div>
-        <div class="comp-prize">2025 &amp; 2026</div>
+    <p class="subheading">Recitals &amp; Festivals</p>
+    <div class="entry-list">
+      <div class="entry">
+        <div class="entry-name">Castello Sforzesco · Piano City Milano — Milan, Italy</div>
+        <div class="entry-detail">2025 &amp; 2026</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">Lyon's Club — Dortmund, Germany</div>
-        <div class="comp-prize">2025</div>
+      <div class="entry">
+        <div class="entry-name">Lyon's Club — Dortmund, Germany</div>
+        <div class="entry-detail">2025</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">SoNoRo Interferenze Festival — Montepulciano, Italy</div>
-        <div class="comp-prize">2023</div>
+      <div class="entry">
+        <div class="entry-name">SoNoRo Interferenze Festival — Montepulciano, Italy</div>
+        <div class="entry-detail">2023</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">Boswil Chamber Music Festival — Boswil, Switzerland</div>
-        <div class="comp-prize"></div>
+      <div class="entry">
+        <div class="entry-name">Boswil Chamber Music Festival — Boswil, Switzerland</div>
+        <div class="entry-detail"></div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">Le Havre Concert Hall — France</div>
-        <div class="comp-prize"></div>
+      <div class="entry">
+        <div class="entry-name">Le Havre Concert Hall — France</div>
+        <div class="entry-detail"></div>
       </div>
     </div>
 
-    <p class="media-subheading">Other Appearances</p>
-    <div class="comp-list">
-      <div class="comp-item">
-        <div class="comp-name">Tivoli Concert Hall — Copenhagen, Denmark</div>
-        <div class="comp-prize"></div>
+    <!--
+      Past Appearances. Add new entries at the top (newest first), in this format:
+        name:   Venue — City, Country · Orchestra
+        detail: the exact date, as <time datetime="YYYY-MM-DD">
+      When a concert from the upcoming concerts card has passed, move it here with all its
+      details, so nothing is lost. Only the ticket link is dropped. The older entries below
+      were added before this format and have no date or orchestra on record yet.
+    -->
+    <p class="subheading">Past Appearances</p>
+    <div class="entry-list">
+      <div class="entry">
+        <div class="entry-name">Festival Zelt — Gstaad, Switzerland · The Royal Danish Orchestra</div>
+        <div class="entry-detail"><time datetime="2026-08-22">22 August 2026</time></div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">Copenhagen Philharmonic Concert Hall — Copenhagen, Denmark</div>
-        <div class="comp-prize"></div>
+      <div class="entry">
+        <div class="entry-name">Concertgebouw — Amsterdam, Netherlands · The Royal Danish Orchestra</div>
+        <div class="entry-detail"><time datetime="2026-08-21">21 August 2026</time></div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">Teatro del Ridotto — Stradella, Italy</div>
-        <div class="comp-prize"></div>
+      <div class="entry">
+        <div class="entry-name">DR Koncerthuset — Copenhagen, Denmark · The Royal Danish Orchestra</div>
+        <div class="entry-detail"><time datetime="2026-08-19">19 August 2026</time></div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">Act City Hamamatsu Concert Hall — Hamamatsu, Japan</div>
-        <div class="comp-prize"></div>
+      <div class="entry">
+        <div class="entry-name">Tivoli Concert Hall — Copenhagen, Denmark</div>
+        <div class="entry-detail"></div>
+      </div>
+      <div class="entry">
+        <div class="entry-name">Copenhagen Philharmonic Concert Hall — Copenhagen, Denmark</div>
+        <div class="entry-detail"></div>
+      </div>
+      <div class="entry">
+        <div class="entry-name">Teatro del Ridotto — Stradella, Italy</div>
+        <div class="entry-detail"></div>
+      </div>
+      <div class="entry">
+        <div class="entry-name">Act City Hamamatsu Concert Hall — Hamamatsu, Japan</div>
+        <div class="entry-detail"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPETITIONS -->
-<section id="competitions">
+<!-- PRIZES -->
+<section id="prizes">
   <div class="container">
-    <h2 class="comp-heading">Prizes &amp; Awards</h2>
-    <div class="comp-list">
+    <h2 class="section-heading">Prizes &amp; Awards</h2>
+    <div class="entry-list">
 
-      <div class="comp-item">
-        <div class="comp-name">"Irina Șatchi" Competition</div>
-        <div class="comp-prize">Grand Prize</div>
+      <div class="entry">
+        <div class="entry-name">"Irina Șatchi" Competition</div>
+        <div class="entry-detail">Grand Prize</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">"PianoTalents" Competition, Milan</div>
-        <div class="comp-prize">1st Prize</div>
+      <div class="entry">
+        <div class="entry-name">"PianoTalents" Competition, Milan</div>
+        <div class="entry-detail">1st Prize</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">"Tadini" Competition</div>
-        <div class="comp-prize">Grand Prize</div>
+      <div class="entry">
+        <div class="entry-name">"Tadini" Competition</div>
+        <div class="entry-detail">Grand Prize</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">"Valsesia Musica" Competition — Special Prize "Giovanni Turcotti" for the best performance of a Beethoven Sonata</div>
-        <div class="comp-prize">Special Prize</div>
+      <div class="entry">
+        <div class="entry-name">"Valsesia Musica" Competition — Special Prize "Giovanni Turcotti" for the best performance of a Beethoven Sonata</div>
+        <div class="entry-detail">Special Prize</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">"C. Franck" Competition</div>
-        <div class="comp-prize">1st Prize</div>
+      <div class="entry">
+        <div class="entry-name">"C. Franck" Competition</div>
+        <div class="entry-detail">1st Prize</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">"R. Langgaard" Competition, Copenhagen</div>
-        <div class="comp-prize">1st Prize</div>
+      <div class="entry">
+        <div class="entry-name">"R. Langgaard" Competition, Copenhagen</div>
+        <div class="entry-detail">1st Prize</div>
       </div>
-      <div class="comp-item">
-        <div class="comp-name">Yamaha Foundation Scholarship, Scandinavia</div>
-        <div class="comp-prize">Scholarship</div>
+      <div class="entry">
+        <div class="entry-name">Yamaha Foundation Scholarship, Scandinavia</div>
+        <div class="entry-detail">Scholarship</div>
       </div>
 
     </div>
@@ -680,12 +748,12 @@
 <!-- MEDIA -->
 <section id="media">
   <div class="container">
-    <h2 class="media-heading">Recordings</h2>
+    <h2 class="section-heading">Recordings</h2>
 
-    <p class="media-subheading">Solo</p>
+    <p class="subheading">Solo</p>
     <div class="album-grid">
       <div class="album-card">
-        <div class="album-embed-wrap">
+        <div class="album-player">
           <iframe
             allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
             height="450"
@@ -694,11 +762,11 @@
             loading="lazy"
           ></iframe>
         </div>
-        <div class="album-meta">
+        <div class="album-header">
           <div class="album-title">Images Oubliées</div>
-          <div class="album-year">KNS Classical · 2024</div>
+          <div class="album-release">KNS Classical · 2024</div>
         </div>
-        <div class="album-subtitle">Debussy: Images Oubliées · D'un cahier d'esquisses · 12 Études L. 136</div>
+        <div class="album-works">Debussy: Images Oubliées · D'un cahier d'esquisses · 12 Études L. 136</div>
         <div class="album-links">
           <a class="album-link" href="https://classical.music.apple.com/us/album/1774892319" target="_blank">Apple Music Classical</a>
           <a class="album-link" href="https://open.spotify.com/album/7ktdnOxtroH3d4HRKbyMRV" target="_blank">Spotify</a>
@@ -708,10 +776,10 @@
       </div>
     </div>
 
-    <p class="media-subheading">Duo Spiro</p>
+    <p class="subheading">Duo Spiro</p>
     <div class="album-grid">
       <div class="album-card">
-        <div class="album-embed-wrap">
+        <div class="album-player">
           <iframe
             allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
             height="450"
@@ -720,11 +788,11 @@
             loading="lazy"
           ></iframe>
         </div>
-        <div class="album-meta">
+        <div class="album-header">
           <div class="album-title">Echoes of Her</div>
-          <div class="album-year">Duo Spiro · Self-released</div>
+          <div class="album-release">Duo Spiro · Self-released</div>
         </div>
-        <div class="album-subtitle">Grieg · Debussy · Schumann · Nordraak · Nielsen</div>
+        <div class="album-works">Grieg · Debussy · Schumann · Nordraak · Nielsen</div>
         <div class="album-links">
           <a class="album-link" href="https://classical.music.apple.com/us/album/1864598319" target="_blank">Apple Music Classical</a>
           <a class="album-link" href="https://www.qobuz.com/us-en/album/echoes-of-her-claude-debussy-edvard-grieg-heinrich-heine-lili-boulanger-amy-beach-pierre-louys-nadia-boulanger-clara-schumann-arne-garborg-poul-schierbeck-maurice-maeterlinck-georges-delaquys-rued-langgaard-thor-lange-emil-rittershaus-george-macdonald-e/qm2k4tel1d3j5" target="_blank">Qobuz</a>
@@ -733,7 +801,7 @@
       </div>
     </div>
 
-    <div class="duo-blurb">
+    <div class="duo-intro">
       Duo Spiro is a Danish–Romanian Lied duo based in Copenhagen, formed by mezzo-soprano Marie Borup and pianist Ștefan Macovei. Their repertoire draws on the French, Scandinavian, and German song traditions.
     </div>
   </div>
@@ -742,14 +810,14 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <h2 class="contact-heading">Contact</h2>
-    <div style="margin-top: 1.5rem;">
-      <p style="font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Email</p>
-      <a href="mailto:stefan99.macovei@gmail.com" style="color:var(--text); text-decoration:none; font-size:1.15rem; border-bottom:1px solid var(--accent); padding-bottom:2px; transition: border-color 0.2s;">stefan99.macovei@gmail.com</a>
+    <h2 class="section-heading">Contact</h2>
+    <div class="contact-item">
+      <p class="contact-label">Email</p>
+      <a class="contact-link" href="mailto:stefan99.macovei@gmail.com">stefan99.macovei@gmail.com</a>
     </div>
-    <div style="margin-top: 2rem;">
-      <p style="font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem;">Instagram</p>
-      <a href="https://www.instagram.com/stefan_m.a.c.o.v.e.i/" target="_blank" rel="noopener" style="color:var(--text); text-decoration:none; font-size:1.15rem; border-bottom:1px solid var(--accent); padding-bottom:2px; transition: border-color 0.2s;">@stefan_m.a.c.o.v.e.i</a>
+    <div class="contact-item">
+      <p class="contact-label">Instagram</p>
+      <a class="contact-link" href="https://www.instagram.com/stefan_m.a.c.o.v.e.i/" target="_blank" rel="noopener">@stefan_m.a.c.o.v.e.i</a>
     </div>
   </div>
 </section>
@@ -760,6 +828,40 @@
     <p class="footer-copy">© 2026 Ștefan Macovei. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  // Bio pages. The browser handles swiping (CSS scroll snapping). This script makes the
+  // dots and arrow buttons change page, and keeps the dots, counter and arrows up to date.
+  (function () {
+    var pageRow = document.querySelector('.about-pages');
+    var pages = pageRow.children;
+    var dots = document.querySelectorAll('.about-dot');
+    var counter = document.querySelector('.about-count');
+    var prevButton = document.querySelector('.about-prev');
+    var nextButton = document.querySelector('.about-next');
+    var currentPage = 0;
+
+    function showPage(i) {
+      pageRow.scrollTo({ left: pages[i].offsetLeft - pages[0].offsetLeft });
+    }
+    function updateControls() {
+      var pageWidth = pages[1].offsetLeft - pages[0].offsetLeft;
+      currentPage = Math.round(pageRow.scrollLeft / pageWidth);
+      dots.forEach(function (dot, i) {
+        if (i === currentPage) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+      counter.textContent = (currentPage + 1) + ' / ' + pages.length;
+      prevButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage === pages.length - 1;
+    }
+
+    dots.forEach(function (dot, i) { dot.addEventListener('click', function () { showPage(i); }); });
+    prevButton.addEventListener('click', function () { showPage(currentPage - 1); });
+    nextButton.addEventListener('click', function () { showPage(currentPage + 1); });
+    pageRow.addEventListener('scroll', updateControls, { passive: true });
+  })();
+</script>
 
 </body>
 </html>
